@@ -1,0 +1,85 @@
+---
+import SocialList from "@/components/SocialList.astro";
+import PostPreview from "@/components/blog/PostPreview.astro";
+import PageLayout from "@/layouts/Base.astro";
+import { getAllPosts, sortMDByDate } from "@/utils";
+
+const MAX_POSTS = 10;
+const allPosts = await getAllPosts();
+const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+
+const projects: { desc: string; href: string; title: string }[] = [
+	{
+		desc: "IoT in agriculture",
+		href: "https://www.nupoint.com",
+		title: "NuPoint",
+	},
+	{
+		desc: "Flexible cards and accessible fintech tools",
+		href: "https://www.ternitup.com",
+		title: "Ternitup",
+	},
+	{
+		desc: "Phoenix city media outdoor large screen broadcast control system",
+		href: "https://www.pmm.cn",
+		title: "PMM",
+	},
+	{
+		desc: "Bar and Sports Table management system",
+		href: "https://www.cages.cn",
+		title: "Cages",
+	},
+	{
+		desc: "Intelligent cabinet",
+		href: "https://datwyler.com",
+		title: "Datwyler",
+	},
+	{
+		desc: "One-Stop IoT Development",
+		href: "https://www.zediot.com",
+		title: "ZedIoT",
+	}
+];
+---
+
+<PageLayout meta={{ title: "Home" }}>
+	<section>
+		<h1 class="title mb-6">Hi There! 👋</h1>
+		<p class="mb-4">
+     My name is Howe aka xi4oh4o in elsewhere, now living in Zhengzhou, China.
+		</p>
+		<SocialList />
+	</section>
+	<section aria-label="Blog post list" class="mt-16">
+		<h2 class="title mb-4 text-xl">Posts</h2>
+		<ul class="space-y-4">
+			{
+				allPostsByDate.map((p) => (
+					<li class="flex flex-col gap-x-2 sm:flex-row">
+						<PostPreview post={p} />
+					</li>
+				))
+			}
+		</ul>
+	</section>
+	<section class="mt-16">
+		<h2 class="title mb-4 text-xl">Project Experiences</h2>
+		<dl class="space-y-4">
+			{
+				projects.map(({ desc, href, title }) => (
+					<div class="flex flex-col gap-2 md:flex-row">
+						<dt>
+							<span class="flex">
+								<a class="cactus-link" href={href} rel="noopener noreferrer" target="_blank">
+									{title}
+								</a>
+								:
+							</span>
+						</dt>
+						<dd>{desc}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</section>
+</PageLayout>
