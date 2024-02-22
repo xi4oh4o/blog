@@ -10,6 +10,8 @@ import icon from "astro-icon";
 import expressiveCode from "astro-expressive-code";
 import { expressiveCodeOptions } from "./src/site.config";
 
+console.log("process", process);
+console.log("env", process.env);
 // https://astro.build/config
 export default defineConfig({
 	// ! Please remember to replace the following site property with your own domain
