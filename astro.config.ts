@@ -13,7 +13,7 @@ import { expressiveCodeOptions } from "./src/site.config";
 // https://astro.build/config
 export default defineConfig({
 	// ! Please remember to replace the following site property with your own domain
-	site: "https://blog.xhs.me/",
+	site: process.env["SITE_URL"] ? process.env["SITE_URL"] : "https://blog.xhs.me/",
 	markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		rehypePlugins: [
